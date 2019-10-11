@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>slot</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-image: url("img/bg.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+      .container {
+        width: 1200px;
+        height: 100%;
+        position: relative;
+        margin: auto;
+      }
+      .baraban_items {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        padding-bottom: 16px;
+      }
+      .baraban {
+        width: calc(100% / 4);
+        border: 5px solid red;
+        box-sizing: content-box;
+        margin: 5px;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        background: #2a2a2a;
+      }
+      .box {
+        margin: 5px;
+        width: calc(100% - 10px);
+        height: calc((100% / 3) - 6px);
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 40%;
+        transition: 0.5s;
+        bottom: 994%;
+        background: orange;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .box.active .box {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        transition: 0s;
+      }
+      .one .triali {
+        animation: mymove 1.2s;
+      }
+      .two .triali {
+        animation: mymove 1.4s;
+      }
+      .three .triali {
+        animation: mymove 1.6s;
+      }
+      .four .triali {
+        animation: mymove 1.8s;
+      }
+      .five .triali {
+        animation: mymove 2s;
+      }
+
+      @keyframes mymove {
+        from {
+          bottom: 994%;
+        }
+        to {
+          bottom: 0;
+        }
+      }
+      .click_out {
+        position: relative;
+        float: left;
+        margin-top: 30px;
+        color: #fff;
+      }
+
+      .click_out_before:before {
+        content: "";
+        z-index: 1;
+        position: absolute;
+        background: #2a2a2a;
+        opacity: 0.5;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .click {
+        color: #fff;
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+      }
+      .cash-money {
+        background: #2a2a2a;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100px;
+        height: 50px;
+        position: relative;
+        font-size: 18px;
+        border: 5px solid red;
+        border-radius: 5px;
+      }
+      .bet-money {
+        border: 5px solid red;
+        border-radius: 5px;
+      }
+      .bet-money input {
+        background: #2a2a2a;
+        position: relative;
+        float: left;
+        border: none;
+        line-height: 50px;
+        outline: none;
+        color: #fff;
+        font-size: 18px;
+        padding-left: 5px;
+        width: 50px;
+      }
+      .bet-money button {
+        background: #2a2a2a;
+        border: none;
+        line-height: 50px;
+        outline: none;
+        color: #fff;
+        font-size: 18px;
+        padding: 0;
+        border-left: 5px solid red;
+        cursor: pointer;
+      }
+      .check-money > p {
+        border: 5px solid red;
+        border-radius: 5px;
+        float: left;
+        background: #2a2a2a;
+        line-height: 50px;
+        color: #fff;
+        font-size: 18px;
+        width: 50px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .check-money > p.active {
+        background: red;
+      }
+    </style>
+    <div class="container">
+      <div class="baraban_items">
+        <div class="baraban one">
+          <div class="box box_one active"></div>
+          <div class="box box_two active"></div>
+          <div class="box box_three active"></div>
+        </div>
+        <div class="baraban two">
+          <div class="box box_one active"></div>
+          <div class="box box_two active"></div>
+          <div class="box box_three active"></div>
+        </div>
+        <div class="baraban three">
+          <div class="box box_one active"></div>
+          <div class="box box_two active"></div>
+          <div class="box box_three active"></div>
+        </div>
+        <div class="baraban four">
+          <div class="box box_one active"></div>
+          <div class="box box_two active"></div>
+          <div class="box box_three active"></div>
+        </div>
+        <div class="baraban five">
+          <div class="box box_one active"></div>
+          <div class="box box_two active"></div>
+          <div class="box box_three active"></div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="cash-money">
+          <span>CASH</span>
+          <p></p>
+        </div>
+        <div class="bet-money">
+          <input
+            class="bet-input"
+            type="text"
+            name=""
+            value=""
+            placeholder="თანხა"
+          />
+          <button class="bet-button">დადება</button>
+        </div>
+        <div class="check-money">
+          <p class="check-money-one active"></p>
+          <p class="check-money-two"></p>
+        </div>
+        <li class="click_out">
+          <a href="javascript:;" class="click">დატრიალება</a>
+          <a href="javascript:;" class="auto_click">ავტომატური</a>
+        </li>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(".check-money > p").click(function() {
+        $(".check-money > p").removeClass("active");
+        $(this).addClass("active");
+      });
+
+      function random_elems(arr, count) {
+        let len = arr.length;
+        let lookup = {};
+        let tmp = [];
+
+        if (count > len) count = len;
+
+        for (let i = 0; i < count; i++) {
+          let index;
+          do {
+            index = ~~(Math.random() * len);
+          } while (index in lookup);
+          lookup[index] = null;
+          tmp.push(arr[index]);
+        }
+
+        return tmp;
+      }
+
+      var some_array = [
+        [
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes"
+        ],
+        [
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes"
+        ],
+        [
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes"
+        ],
+        [
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes"
+        ],
+        [
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes",
+          "apple",
+          "apricot",
+          "Seven",
+          "bannana",
+          "orange",
+          "plums",
+          "leamon",
+          "Cherry",
+          "Watermelon",
+          "Grapes"
+        ]
+      ];
+
+      var money = "0";
+      $(".bet-button").click(function() {
+        var cash = $(".bet-input").val();
+        $(".cash-money > p").html(cash);
+        money = cash;
+      });
+      // $(".cash-money").html(cash);
+
+      var betMonyOne = 0.1;
+      var betMonyTwo = 0.2;
+
+      $(".cash-money > p").html(money);
+      $(".check-money-one").html(betMonyOne);
+      $(".check-money-two").html(betMonyTwo);
+
+      function randomMain() {
+        var monthsOne = random_elems(some_array[0], 31);
+        var monthsTwo = random_elems(some_array[1], 31);
+        var monthsThree = random_elems(some_array[2], 31);
+        var monthsFour = random_elems(some_array[3], 31);
+        var monthsFive = random_elems(some_array[4], 31);
+
+        for (var i = 0; i < monthsOne.length; i++) {
+          var html = $(".baraban.one").prepend(
+            '<div class="box" style="background-image: url(img/' +
+              monthsOne[i] +
+              '.png)"</div>'
+          );
+        }
+        for (var i = 0; i < monthsTwo.length; i++) {
+          var html = $(".baraban.two").prepend(
+            '<div class="box" style="background-image: url(img/' +
+              monthsTwo[i] +
+              '.png)"</div>'
+          );
+        }
+        for (var i = 0; i < monthsThree.length; i++) {
+          var html = $(".baraban.three").prepend(
+            '<div class="box" style="background-image: url(img/' +
+              monthsThree[i] +
+              '.png)"</div>'
+          );
+        }
+        for (var i = 0; i < monthsFour.length; i++) {
+          var html = $(".baraban.four").prepend(
+            '<div class="box" style="background-image: url(img/' +
+              monthsFour[i] +
+              '.png)"</div>'
+          );
+        }
+        for (var i = 0; i < monthsFive.length; i++) {
+          var html = $(".baraban.five").prepend(
+            '<div class="box" style="background-image: url(img/' +
+              monthsFive[i] +
+              '.png)"</div>'
+          );
+        }
+      }
+      randomMain();
+
+      function ClonElement() {
+        var one_baraban_box_one = $(".one .box:nth-of-type(1)").clone();
+        var one_baraban_box_two = $(".one .box:nth-of-type(2)").clone();
+        var one_baraban_box_three = $(".one .box:nth-of-type(3)").clone();
+        $(".one .box_one").append(one_baraban_box_one);
+        $(".one .box_two").append(one_baraban_box_two);
+        $(".one .box_three").append(one_baraban_box_three);
+
+        var two_baraban_box_one = $(".two .box:nth-of-type(1)").clone();
+        var two_baraban_box_two = $(".two .box:nth-of-type(2)").clone();
+        var two_baraban_box_three = $(".two .box:nth-of-type(3)").clone();
+        $(".two .box_one").append(two_baraban_box_one);
+        $(".two .box_two").append(two_baraban_box_two);
+        $(".two .box_three").append(two_baraban_box_three);
+
+        var three_baraban_box_one = $(".three .box:nth-of-type(1)").clone();
+        var three_baraban_box_two = $(".three .box:nth-of-type(2)").clone();
+        var three_baraban_box_three = $(".three .box:nth-of-type(3)").clone();
+        $(".three .box_one").append(three_baraban_box_one);
+        $(".three .box_two").append(three_baraban_box_two);
+        $(".three .box_three").append(three_baraban_box_three);
+
+        var four_baraban_box_one = $(".four .box:nth-of-type(1)").clone();
+        var four_baraban_box_two = $(".four .box:nth-of-type(2)").clone();
+        var four_baraban_box_three = $(".four .box:nth-of-type(3)").clone();
+        $(".four .box_one").append(four_baraban_box_one);
+        $(".four .box_two").append(four_baraban_box_two);
+        $(".four .box_three").append(four_baraban_box_three);
+
+        var five_baraban_box_one = $(".five .box:nth-of-type(1)").clone();
+        var five_baraban_box_two = $(".five .box:nth-of-type(2)").clone();
+        var five_baraban_box_three = $(".five .box:nth-of-type(3)").clone();
+        $(".five .box_one").append(five_baraban_box_one);
+        $(".five .box_two").append(five_baraban_box_two);
+        $(".five .box_three").append(five_baraban_box_three);
+      }
+      ClonElement();
+
+      var audioClick = document.createElement("audio");
+      audioClick.src =
+        "http://plantsvszombies.clan.su/publfiles/downloads/soundspvz/slotmachine.mp3";
+      var audio = document.createElement("audio");
+      audio.src = "http://cd.textfiles.com/bearwarecd/animate/ANIMATE1.WAV";
+
+      audio.addEventListener(
+        "ended",
+        function() {
+          this.play();
+          this.currentTime = 0;
+        },
+        false
+      );
+
+      function mainClick() {
+        var betoneHasclass = $(".check-money-one").hasClass("active");
+        var bettwoHasclass = $(".check-money-two").hasClass("active");
+
+        if (betoneHasclass === true) {
+          money = parseFloat(money - betMonyOne).toFixed(2);
+        }
+        if (bettwoHasclass === true) {
+          money = parseFloat(money - betMonyTwo).toFixed(2);
+        }
+
+        $(".cash-money > p").html(money);
+
+        $(".baraban>div:nth-of-type(1n+1)")
+          .not(".box.active")
+          .remove();
+        $(".box.active > .box:nth-of-type(1n+1)").remove();
+        randomMain();
+        ClonElement();
+
+        $(".click_out").addClass("click_out_before");
+        $(".box").addClass("triali");
+
+        audioClick.play();
+        setTimeout(function() {
+          audioClick.pause();
+          audioClick.currentTime = 0;
+        }, 800);
+        setTimeout(function() {
+          audio.play();
+        }, 1000);
+
+        setTimeout(function() {
+          $(".one .box").removeClass("triali");
+        }, 1200);
+        setTimeout(function() {
+          $(".two .box").removeClass("triali");
+        }, 1400);
+        setTimeout(function() {
+          $(".three .box").removeClass("triali");
+        }, 1600);
+        setTimeout(function() {
+          $(".four .box").removeClass("triali");
+        }, 1800);
+        setTimeout(function() {
+          $(".five .box").removeClass("triali");
+          audio.pause();
+          audio.currentTime = 0;
+        }, 2000);
+        setTimeout(function() {
+          $(".click_out").removeClass("click_out_before");
+        }, 2110);
+      }
+
+      $(".click").click(function() {
+        if (money > 0) {
+          mainClick();
+        }
+      });
+      $(".auto_click").click(function() {
+        if (money > 0) {
+          mainClick();
+          setInterval(function() {
+            mainClick();
+          }, 2110);
+        }
+      });
+
+      setTimeout(function() {
+        audio.pause();
+        audio.currentTime = 0;
+      }, 2000);
+
+      // $(document).ready(function() {
+      //     var audioElement = document.createElement('audio');
+      //     audioElement.setAttribute('src', 'http://cd.textfiles.com/bearwarecd/animate/ANIMATE1.WAV');
+
+      //     audioElement.addEventListener('ended', function() {
+      //         this.play();
+      //     }, false);
+
+      //     audioElement.addEventListener("canplay",function(){
+      //         $("#length").text("Duration:" + audioElement.duration + " seconds");
+      //         $("#source").text("Source:" + audioElement.src);
+      //         $("#status").text("Status: Ready to play").css("color","green");
+      //     });
+
+      //     audioElement.addEventListener("timeupdate",function(){
+      //         $("#currentTime").text("Current second:" + audioElement.currentTime);
+      //     });
+
+      //     $('.click').click(function() {
+      //         audioElement.play();
+      //         $("#status").text("Status: Playing");
+      //     });
+
+      //     $('#pause').click(function() {
+      //         audioElement.pause();
+      //         $("#status").text("Status: Paused");
+      //     });
+
+      //     $('#restart').click(function() {
+      //         audioElement.currentTime = 0;
+      //     });
+      // });
+    </script>
+  </body>
+</html>
